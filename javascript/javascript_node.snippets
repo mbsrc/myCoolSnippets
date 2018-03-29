@@ -1,11 +1,86 @@
-priority -50
-
 snippet #! "shebang"
 #!/usr/bin/env node
 endsnippet
 
 
-# PROCESS VARIABLES --------------------------------------------------
+
+#-- REQUIREJS --------------------------------------------------------
+#--------------------------------------------------- Require Module --
+snippet r "Require module" b
+const $2 = require('$1')
+endsnippet
+
+snippet 'r\.([a-z,A-Z,\-,\.]+)' "Require matching name module" br
+const `!p snip.rv=specialRequire(match.group(1))`
+endsnippet
+
+snippet rd "Require & destruct module" b
+const { $2 } = require('$1')
+endsnippet
+
+snippet 'rd\.(\w+)' "Require & destruct named module" br
+const { $1 } = require('`!p snip.rv=match.group(1)`')
+endsnippet
+
+
+#------------------------------------------- Require Sibling Module --
+snippet rs "Require sibling module" b
+const $2 = require('./$1')
+endsnippet
+
+snippet 'rs\.([a-z,A-Z,\-]+)' "Require matching name sibling module" br
+const `!p snip.rv=specialRequire(match.group(1), 'sibling')`
+endsnippet
+
+snippet rsd "Require & destruct sibling module" b
+const { $2 } = require('./$1')
+endsnippet
+
+snippet 'rsd\.(\w+)' "Require & destruct named sibling module" br
+#_____ RequireJS Parent Modules _____
+snippet rp "Require parent module" b
+const $2 = require('../$1')
+endsnippet
+
+
+#-------------------------------------------- Require Parent Module --
+snippet 'rp\.([a-z,A-Z,\-]+)' "Require matching name parent module" br
+const `!p snip.rv=specialRequire(match.group(1), 'parent')`
+endsnippet
+
+snippet rpd "Require & destruct parent module" b
+const { $2 } = require('../$1')
+endsnippet
+
+snippet 'rpd\.(\w+)' "Require & destruct named parent module" br
+const { $1 } = require('../`!p snip.rv=match.group(1)`')
+endsnippet
+
+
+#--------------------------------------------------- Module Exports --
+snippet me "Module exports object" b
+module.exports = {
+	$1
+}
+endsnippet
+
+snippet 'me\.([a-z,A-Z,\-]+)' "Module exports object value" rb
+module.exports = `!p snip.rv=match.group(1)`
+endsnippet
+
+snippet med "Module exports default" b
+module.exports = $1
+endsnippet
+
+snippet mef "Module exports default function" b
+module.exports = function $1ModuleExport($2) {
+
+}
+endsnippet
+
+
+
+#-- PROCESS VARIABLES ------------------------------------------------
 snippet pr "process." w
 process.$0
 endsnippet
@@ -14,7 +89,9 @@ snippet pr.a "process.argv." w
 process.argv.$0
 endsnippet
 
-#----- Process Environment Variables -----------------------------------
+
+
+#-- PROCESS ENV ------------------------------------------------------
 snippet pr.e "process.env." w
 process.env.$0
 endsnippet
@@ -32,13 +109,17 @@ process.env.MONGODB_URI = ${0:${VISUAL}}
 endsnippet
 
 
-#----- Process Hooks --------------------------------------------------
+
+#-- PROCESS HOOKS ----------------------------------------------------
 snippet pr.o "process.on()" w
 process.on('$1', function ${2:onProcess}$4($5) {
 	${0:${VISUAL}}
 })
 endsnippet
 
+
+
+#-- PROCESS IO -------------------------------------------------------
 snippet pr.out "stdout" w
 process.stdout.${1:write($2)}
 endsnippet
@@ -51,6 +132,9 @@ snippet pr.std "stderr" w
 process.stderr
 endsnippet
 
+
+
+#-- HTTP -------------------------------------------------------------
 snippet hcs "http.createServer"
 http.createServer($1).listen($2)$0
 endsnippet
@@ -71,13 +155,28 @@ pipe(${1:stream})$2
 endsnippet
 
 
-#---------- EXPRESS ----------
-snippet ex.app "express GET"
+
+#-- EXPRESS ----------------------------------------------------------
+snippet ex.app "express app"
 const app = express()
+endsnippet
+
+
+#--------------------------------------------- Http Request Methods --
+snippet ex.del "express DELETE"
+app.delete('/$1', function delete${2:`!p snip.rv=t[1].title()`}CB(req, res) {
+	${0:${VISUAL}}
+})
 endsnippet
 
 snippet ex.get "express GET"
 app.get('/$1', function get${2:`!p snip.rv=t[1].title()`}CB(req, res) {
+	${0:${VISUAL}}
+})
+endsnippet
+
+snippet ex.pat "express PATCH"
+app.patch('/$1', function patch${2:`!p snip.rv=t[1].title()`}CB(req, res) {
 	${0:${VISUAL}}
 })
 endsnippet
@@ -94,37 +193,13 @@ app.put('/$1', function put${2:functionName}CB(req, res) {
 })
 endsnippet
 
-snippet ex.pat "express PATCH"
-app.patch('/$1', function patch${2:functionName}CB(req, res) {
-	${0:${VISUAL}}
-})
-endsnippet
 
-snippet ex.del "express DELETE"
-app.delete('/$1', function delete${2:functionName}CB(req, res) {
-	${0:${VISUAL}}
-})
-endsnippet
-
-snippet ex.f "Express function" iA
-function $1CB(req, res) {
-	$0
-}
-endsnippet
-
-snippet ex.mf "Express const middleware function" b 
-const $1 = function $1CB(req, res, next) {
-	$0
-
-	next()
-}
-endsnippet
-
+#--------------------------------------------------- Http Responses --
 snippet ex.s "Express send"
 res.send($1)
 endsnippet
 
-snippet ex.stat "Express send"
+snippet ex.stat "Express status send"
 res.status(${1:400}).send($2)
 endsnippet
 
@@ -134,12 +209,31 @@ res.render('$1.hbs', {
 })
 endsnippet
 
-snippet ex.use "Express middleware"
+
+#------------------------------------------------------- Middleware --
+snippet ex.mf "Express middleware function" b
+const $1 = function $1CB(req, res, next) {
+	${0:${VISUAL}}
+
+	next()
+}
+endsnippet
+
+snippet ex.use "app.use('middleware')" b
 app.use(${1:function ${2:functionName}(req, res, next) {
 	$0
 	${3:next()}
 }})
 endsnippet
+
+
+#-------------------------------------------------------- Functions --
+snippet ex.f "Express function" iA
+function $1CB(req, res) {
+	${0:${VISUAL}}
+}
+endsnippet
+
 
 snippet ex.listen "app.listen" b
 app.listen(${1:3000}, function appListenCB() {
@@ -147,7 +241,9 @@ app.listen(${1:3000}, function appListenCB() {
 })
 endsnippet
 
-snippet ex.pb "Require express boilerplate" b
+
+#----------------------------------------------------- Boilerplates --
+snippet ex.pb "Express server boilerplate" b
 const express = require('express')
 
 
