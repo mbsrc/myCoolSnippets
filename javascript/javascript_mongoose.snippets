@@ -1,34 +1,33 @@
-global !p
-from snippet_helpers import *
-endglobal
 
-# CONNECTIONS -------------------------------------------------------
+#-- CONNECTIONS ------------------------------------------------------
 snippet mg.connect
 mongoose.connect('mongodb://${1:localhost}:27017/${2:Database}')
 endsnippet
 
 
-# SCHEMA METHODS ----------------------------------------------------
+
+#-- SCHEMA METHODS ---------------------------------------------------
 snippet mg.im "Schema.methods." b
 $1Schema.methods.$2 = function $2Methods() {
-	$0	
+	$0
 }
 endsnippet
 
 snippet mg.sm "Schema.statics." b
 $1Schema.statics.$2 = function $2Statics($3) {
-	$0	
+	$0
 }
 endsnippet
 
 snippet mg.pre "Schema.pre(...)" b
 $1Schema.pre('${2:save}', function $2Pre(next) {
-	$0	
+	$0
 })
 endsnippet
 
 
-# MODELS ------------------------------------------------------------
+
+#-- MODELS -----------------------------------------------------------
 snippet mg.model "Mongoose Model" b
 const mongoose = require('mongoose')
 
@@ -60,8 +59,9 @@ $1.save(function $1SaveInstanceCB(error) {
 endsnippet
 
 
-# MODEL METHODS -----------------------------------------------------
-snippet mg.find "Model.find({})" 
+
+#-- MODEL METHODS ----------------------------------------------------
+snippet mg.find "Model.find({...})" b
 ${1:Model`!p model=t[1].lower()`}.find({
 		${2:_id}: $3,
 	})
@@ -73,7 +73,7 @@ ${1:Model`!p model=t[1].lower()`}.find({
 	})
 endsnippet
 
-snippet mg.findbyid
+snippet mg.findbyid "Model.findById(id)" b
 ${1:Model`!p model=t[1].lower()`}.findById({
 		${2:_id}: $3,
 	})
@@ -85,7 +85,7 @@ ${1:Model`!p model=t[1].lower()`}.findById({
 	})
 endsnippet
 
-snippet mg.findone
+snippet mg.findone "Model.findOne({...})" b
 ${1:Model`!p model=t[1].lower()`}.findOne({
 		${2:_id}: $3,
 	})
@@ -97,13 +97,14 @@ ${1:Model`!p model=t[1].lower()`}.findOne({
 	})
 endsnippet
 
-snippet mg.remove
-${1:Entity}.remove({
-	_id: req.params.${2:entity_id}
-}, function(error, ${3:entity}) {
-	if (error)
-		res.send(error)
-	res.json({ message: 'Successfully deleted' })
-})
+snippet mg.remove "Model.remove({...})" b
+${1:Model`!p model=t[1].lower()`}.remove({
+		${2:_id}: $3,
+	})
+	.then(function `!p snip.rv=model`RemoveCB(${4:`!p snip.rv=model`}) {
+		$5
+	})
+	.catch(function `!p snip.rv=model`RemoveError(error) {
+		$6
+	})
 endsnippet
-
