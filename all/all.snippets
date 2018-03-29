@@ -1,3 +1,9 @@
+#-- SNIPPET GLOBALS --------------------------------------------------
+global !p
+from SnippetHelpers import (commentSymbol, titlePadding)
+
+endglobal
+
 snippet filename "Complete path to current file" b
 `!p snip.rv=snip.fn`
 endsnippet
@@ -7,9 +13,9 @@ snippet basename "Complete path to current file" b
 endsnippet
 
 snippet header "Snippet header" b
-#-- ${1:`!p t[1]=t[1].upper()`} `!p snip.rv="-" * (64 - len(t[1]))`
+`!p snip.rv=commentSymbol(snip.ft)`-- ${1:`!p t[1]=t[1].upper()`} `!p snip.rv=titlePadding(t[1])`
 endsnippet
 
 snippet subheader "Test snippet" b
-#`!p snip.rv="-" * (64 - len(t[1]))` $1 --
+`!p snip.rv=commentSymbol(snip.ft) + titlePadding(t[1])` ${1:`!p t[1]=t[1].title()`} --
 endsnippet
