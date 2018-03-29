@@ -1,0 +1,366 @@
+#----- React imports -----
+snippet ri "Import react" b
+import React from 'react'
+endsnippet
+
+snippet ri2 "Import both React and Component" b
+import React, { Component } from 'react'
+endsnippet
+
+snippet ri3 "Import both React, Component and proptypes" b
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+endsnippet
+
+snippet rid "Import ReactDOM" b
+import ReactDOM from 'react-dom'
+endsnippet
+
+snippet rid "Import render from react-dom" b
+import { render } from 'react-dom'
+endsnippet
+
+
+
+#----- Props -----
+snippet rtp "Get property" i
+this.props.${1}
+endsnippet
+
+snippet pp "Get Props"
+${props => props.${1}}
+endsnippet
+
+snippet rcdp "Default props" b
+static defaultProps = {
+	${1}: ${2},
+}
+endsnippet
+
+snippet ref "Ref" i
+ref={${1:ref} => { this.${2:name} = $1 }}
+endsnippet
+
+snippet cn "className"
+className="$1"
+endsnippet
+
+
+
+#----- PropTypes -----
+snippet rcpt "Proptypes"
+static propTypes = {
+	${1}: PropTypes.${0},
+}
+endsnippet
+
+snippet pt "PropTypes Definition" b
+${1:`!v expand('%:t:r')`.}propTypes = {
+	${2:className}: ${3:PropTypes.string},
+}
+endsnippet
+
+snippet pt.a "PropTypes Array" w
+PropTypes.array${1:,}
+endsnippet
+
+snippet pt.b "PropTypes Boolean" w
+PropTypes.bool${1:,}
+endsnippet
+
+snippet pt.f "PropTypes Function" w
+PropTypes.func${1:,}
+endsnippet
+
+snippet pt.n "PropTypes Number" w
+PropTypes.number${1:,}
+endsnippet
+
+snippet pt.o "PropTypes Object" w
+PropTypes.object${1:,}
+endsnippet
+
+snippet pt.s "PropType String" w
+PropTypes.string${1:,}
+endsnippet
+
+snippet pt.no "PropTypes Node" w
+PropTypes.node${1:,}
+endsnippet
+
+snippet pt.e "PropTypes Element" w
+PropTypes.element${1:,}
+endsnippet
+
+snippet pt.io "PropTypes instanceOf" w
+PropTypes.instanceOf(${2:PropTypes.string})${1:,}
+endsnippet
+
+snippet pt.one "PropTypes oneOf" w
+PropTypes.oneOf(['$2'$3])${1:,}
+endsnippet
+
+snippet pt.onet "PropTypes oneOfType" w
+PropTypes.oneOfType([
+	$2
+])${1:,}
+endsnippet
+
+snippet pt.ao "PropTypes arrayOf" w
+PropTypes.arrayOf(${2:PropTypes.string})${1:,}
+endsnippet
+
+snippet pt.oo "PropTypes objectOf" w
+PropTypes.objectOf(${2:PropTypes.string})${1:,}
+endsnippet
+
+snippet pt.sh "PropTyes Shape" w
+PropTypes.shape({
+	$2
+})${1:,}
+endsnippet
+
+snippet isr "isRequired" w
+isRequired,
+endsnippet
+
+
+#----- State -----
+snippet st "State" b
+state = {
+	${1}: ${2},
+}
+endsnippet
+
+snippet rsst "Set state" b
+this.setState({
+	${1}: ${2},
+})
+endsnippet
+
+snippet rtst "Get state" i
+this.state.${1}
+endsnippet
+
+
+
+#----- React methods -----
+snippet rcon "React constructor" b
+constructor(props) {
+	super(props)
+
+	this.state = {
+		${1}: ${0},
+	}
+}
+endsnippet
+
+snippet cwm "Component Will Mount" b
+componentWillMount() {
+	$1
+}
+endsnippet
+
+snippet cdm "Component Did Mount" b
+componentDidMount() {
+	$1
+}
+endsnippet
+
+snippet cwrp "Component Will Receive Props" b
+componentWillReceiveProps(nextProps) {
+	$1
+}
+endsnippet
+
+snippet scup "Should Component Update" b
+shouldComponentUpdate(nextProps, nextState) {
+	$1
+}
+endsnippet
+
+snippet cwup "Component Will Update" b
+componentWillUpdate(nextProps, nextState) {
+	$1
+}
+endsnippet
+
+snippet cdup "Component Did Update" b
+componentDidUpdate(prevProps, prevState) {
+	$1
+}
+endsnippet
+
+snippet cwu "Component Will Unmount" b
+componentWillUnmount() {
+	$1
+}
+endsnippet
+
+snippet ren "Render"
+render() {
+	return ${1:(
+		${2:<div>${3}</div>}
+	)}
+}
+endsnippet
+
+snippet rfup "Force update"
+forceUpdate(${1:callback})
+endsnippet
+
+
+
+#----- React classes -----
+snippet rc "React class"
+class ${1:MyComponent} extends Component {
+	render() {
+		return (
+			${0:<div></div>}
+		)
+	}
+}
+endsnippet
+
+snippet rcc "React Class Component" b
+import React, { Component} from 'react'
+import PropTypes from 'prop-types'
+
+class ${1:`!v expand('%:t:r')`} extends Component {
+	static propTypes = {
+		children: PropTypes.node,
+		className: PropTypes.string,
+	}
+
+	constructor(props) {
+		super(props)
+	}
+
+	render() {
+		return (
+			<div>
+				$3
+			</div>
+		)
+	}
+}
+
+export default $1
+endsnippet
+
+snippet rrcc "React Redux Class Component" b
+import React, { Component} from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+
+class ${1:`!v expand('%:t:r')`} extends Component {
+	static propTypes = {
+		children: PropTypes.node,
+		className: PropTypes.string,
+		dispatch: PropTypes.func.isRequired,
+	}
+
+	constructor(props) {
+		super(props)
+	}
+
+	render() {
+		return (
+			<div>
+				$2
+			</div>
+		)
+	}
+}
+
+function mapStateToProps(state) {
+	return {}
+}
+
+export default connect(mapStateToProps)($1)
+endsnippet
+
+snippet ercc
+export default class ${1:ClassName} extends React.Component {
+	render() {
+		return (
+			${0:<div />}
+		)
+	}
+}
+endsnippet
+
+
+
+#----- Functional components -----
+snippet rfc "React Functional Component" b
+import React from 'react'
+import PropTypes from 'prop-types'
+
+function ${1:`!v expand('%:t:r')`}(${2:{...props}}) {
+	return (
+		<div>
+			$3
+		</div>
+	)
+}
+
+$1.defaultProps = {}
+
+$1.propTypes = {}
+
+export default $1
+endsnippet
+
+
+snippet rcom "Functional component"
+const = props => {
+	return (
+		${0:<div></div>}
+	)
+}
+endsnippet
+
+snippet rpt "Functional component propTypes"
+	${1}.propTypes = {
+		${2}: PropTypes.${0},
+	}
+endsnippet
+
+snippet re.dp "Functional components default props"
+	${1}.defaultProps = {
+		${2}: ${0},
+	}
+endsnippet
+
+
+
+#----- Styled components -----
+snippet rsc "React Styled Component" b
+import styled from 'styled-components'
+
+const ${1:`!v expand('%:t:r')`} = styled.${2:div}\`
+	$3
+\`
+
+export default $1
+endsnippet
+
+snippet rsci "React Styled Component Interpolation" b
+import styled, { css } from 'styled-components'
+
+const ${1:`!v expand('%:t:r')`} = styled.${2:div}\`${props => css\`
+	${3:${props.$4 && \`
+		$5
+	\`}}
+\`}\`
+
+export default $1
+endsnippet
+
+
+
+#----- React DOM -----
+snippet rdr
+ReactDOM.render(${1}, ${2})
+endsnippet

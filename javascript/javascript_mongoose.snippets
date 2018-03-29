@@ -1,0 +1,109 @@
+global !p
+from snippet_helpers import *
+endglobal
+
+# CONNECTIONS -------------------------------------------------------
+snippet mg.connect
+mongoose.connect('mongodb://${1:localhost}:27017/${2:Database}')
+endsnippet
+
+
+# SCHEMA METHODS ----------------------------------------------------
+snippet mg.im "Schema.methods." b
+$1Schema.methods.$2 = function $2Methods() {
+	$0	
+}
+endsnippet
+
+snippet mg.sm "Schema.statics." b
+$1Schema.statics.$2 = function $2Statics($3) {
+	$0	
+}
+endsnippet
+
+snippet mg.pre "Schema.pre(...)" b
+$1Schema.pre('${2:save}', function $2Pre(next) {
+	$0	
+})
+endsnippet
+
+
+# MODELS ------------------------------------------------------------
+snippet mg.model "Mongoose Model" b
+const mongoose = require('mongoose')
+
+const { Schema } = mongoose
+
+
+const ${1:Model}Schema = new Schema({
+	$2: ${3:String},$4
+})
+
+module.exports = mongoose.model('`!p snip.rv=camelCaseWord(t[1])`', $1Schema)
+endsnippet
+
+snippet mg.schema "Mongoose Schema" b
+const ${1:Model}Schema = new Schema({
+	$2: ${3:String},$4
+})
+
+endsnippet
+
+snippet mg.save
+const $1 = new ${2:Model}()
+
+$1.save(function $1SaveInstanceCB(error) {
+	if (error) res.send(error)
+
+	${3:res.json($4)}
+})
+endsnippet
+
+
+# MODEL METHODS -----------------------------------------------------
+snippet mg.find "Model.find({})" 
+${1:Model`!p model=t[1].lower()`}.find({
+		${2:_id}: $3,
+	})
+	.then(function `!p snip.rv=model`sFindCB(${4:`!p snip.rv=model`s}) {
+		$5
+	})
+	.catch(function `!p snip.rv=model`sFindError(error) {
+		$6
+	})
+endsnippet
+
+snippet mg.findbyid
+${1:Model`!p model=t[1].lower()`}.findById({
+		${2:_id}: $3,
+	})
+	.then(function `!p snip.rv=model`FindByIdCB(${4:`!p snip.rv=model`}) {
+		$5
+	})
+	.catch(function `!p snip.rv=model`findByIdError(error) {
+		$6
+	})
+endsnippet
+
+snippet mg.findone
+${1:Model`!p model=t[1].lower()`}.findOne({
+		${2:_id}: $3,
+	})
+	.then(function `!p snip.rv=model`FindOneCB(${4:`!p snip.rv=model`})  {
+		$5
+	})
+	.catch(function `!p snip.rv=model`FindOneError(error) {
+		$6
+	})
+endsnippet
+
+snippet mg.remove
+${1:Entity}.remove({
+	_id: req.params.${2:entity_id}
+}, function(error, ${3:entity}) {
+	if (error)
+		res.send(error)
+	res.json({ message: 'Successfully deleted' })
+})
+endsnippet
+

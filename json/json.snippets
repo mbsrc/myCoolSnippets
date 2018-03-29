@@ -1,0 +1,64 @@
+priority -50
+
+global !p
+def compB(t, opts):
+	if t:
+		opts = [m[len(t):] for m in opts if m.startswith(t)]
+	if len(opts) == 1:
+		return opts[0]
+	return "(" + '|'.join(opts) + ')'
+endglobal
+
+snippet s "String" b
+"${1:key}": "${0:value}",
+endsnippet
+
+snippet n "Number" b
+"${1:key}": ${0:value},
+endsnippet
+
+snippet a "Array" b
+[
+	${VISUAL}$0
+],
+endsnippet
+
+snippet na "Named array" b
+"${1:key}": [
+	${VISUAL}$0
+],
+endsnippet
+
+snippet o "Object" b
+{
+	${VISUAL}$0
+},
+endsnippet
+
+snippet no "Named object" b
+"${1:key}": {
+	${VISUAL}$0
+},
+endsnippet
+
+snippet null "Null" b
+"${0:key}": null,
+endsnippet
+
+snippet b "Bool" b
+"${1:key}": $2`!p snip.rv=compB(t[2], ['true', 'false'])`,
+endsnippet
+
+snippet scripts "scripts: {...}" w
+"scripts": {
+	"${1:test}": "$2"
+	"${3:start}": "${4:node server/server.js}"
+},
+endsnippet
+
+snippet engines "engines: {...}" w
+"engines": {
+	"${1:node}": "${2:9.8.0}"
+},
+endsnippet
+

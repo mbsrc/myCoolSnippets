@@ -1,0 +1,47 @@
+#---------- SNIPPET GLOBALS ----------
+global !p
+from javascript_snippets import (
+	semi, space_before_function_paren, keyword_spacing
+)
+from js_snippet_helpers import (camelCase, titleCamelCase)
+
+endglobal
+
+
+
+
+
+
+# SOCKETS ------------------------------------------------------------
+snippet 'soc.o(n)?' "socket.on(event, cb)" br
+socket.on('$1', function socketOn`!p snip.rv=titleCamelCase(t[1])`($2) {
+	${0:${VISUAL}}
+})
+endsnippet
+
+snippet soc.oc "socket.on('connect', cb)" b
+socket.on('connect', function socketOnConnect() {
+	${0:${VISUAL}}
+})
+endsnippet
+
+snippet soc.od "socket.on('disconnect', cb)" b
+socket.on('disconnect', function socketOnDisconnect() {
+	${0:${VISUAL}}
+})
+endsnippet
+
+
+snippet soc.e "socket.emit('event', data)" b
+socket.emit('$1', ${2:{
+	$3: $4,$0
+}})
+endsnippet
+
+
+# IO ----------------------------------------------------------------
+snippet io.e "io.emit('event', data)" b
+io.emit('$1', ${2:{
+	$3: $4,$0
+}})
+endsnippet

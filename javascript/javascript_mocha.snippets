@@ -1,0 +1,117 @@
+snippet des "describe('thing', () => { ... })" b
+describe('${1:}', () => {
+	it('$2', (${3:done}) => {
+		${0:${VISUAL}}
+	})
+})
+endsnippet
+
+snippet it "it('should do', () => { ... })" b
+it('${1:}', (${2:done}) => {
+	${0:${VISUAL}}
+})
+endsnippet
+
+snippet xit "xit('should do', () => { ... })" b
+xit('${1:}', () => {
+	${0:${VISUAL}}
+})
+endsnippet
+
+snippet bef "before(() => { ... })" b
+before(() => {
+	${0:${VISUAL}}
+})
+endsnippet
+
+snippet befe "beforeEach(() => { ... })" b
+beforeEach((${1:done}) => {
+	${0:${VISUAL}}
+})
+endsnippet
+
+snippet aft "after(() => { ... })" b
+after(() => {
+	${0:${VISUAL}}
+})
+endsnippet
+
+snippet afte "afterEach(() => { ... })" b
+afterEach(() => {
+	${0:${VISUAL}}
+})
+endsnippet
+
+
+# EXPECT ------------------------------------------------------------
+snippet exp "expect()" i
+expect($1)
+endsnippet
+
+snippet exp.tb "expect(...).toBe(...)" b
+expect($1).toBe($2)
+endsnippet
+
+snippet exp.tnb "expect(...).not.toBe(...)" b
+expect($1).not.toBe($2)
+endsnippet
+
+snippet exp.tbd "expect(...).toBeDefined()" b
+expect($1).toBeDefined()
+endsnippet
+
+snippet exp.tex "expect(...).to.equal(...)" b
+expect($1).to.equal($0)
+endsnippet
+
+snippet exp.tde "expect(...).to.deep.equal(...)" b
+expect($1).to.deep.equal($0)
+endsnippet
+
+
+# SUPERTEST ----------------------------------------------------------
+snippet st. ".expect()" b
+.expect($1)
+endsnippet
+
+snippet st.f ".expect((res) => {...})" b
+.expect((res) => {
+	$0
+})
+endsnippet
+
+snippet st.post "request(app).post(...)" b
+request(app)
+	.post('/$1')
+	.send(${2:{ $3 }})
+	.expect(${4:200})
+	${5:.expect((res) => {
+		expect($6)$7
+	})}
+	.end(${8:done})
+endsnippet
+
+snippet st.get "request(app).get(...)" b
+request(app)
+	.get('/$1')
+	.expect(${2:200})
+	.end(${3:done})
+endsnippet
+
+snippet st.delete "request(app).delete(...)" b
+request(app)
+	.delete('/$1')
+	.expect(${2:200})
+	.end(${3:done})
+endsnippet
+
+snippet st.done ".expect((res) => {...})" b
+.end(done)
+endsnippet
+
+snippet st.end ".expect((res) => {...})" b
+.end((err, res) => {
+	$0
+})
+endsnippet
+

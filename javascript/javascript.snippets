@@ -1,0 +1,728 @@
+priority -50
+
+############
+#  COMMON  #
+############
+
+# The smart snippets use a global options called
+# "g:ultisnips_javascript.{option}" which can control the format
+# of trailing semicolon, space before function paren, etc.
+#
+# e.g.
+# let g:ultisnips_javascript = {
+#      \ 'keyword-spacing': 'always',
+#      \ 'semi': 'never',
+#      \ 'space-before-function-paren': 'always',
+#      \ }
+
+
+#---------- SNIPPET GLOBALS ----------
+global !p
+import sys
+customPath = '/Users/marc/.config/marcsCoolSnippets/pythonx'
+if customPath not in sys.path: sys.path.append(customPath)
+
+from javascript_snippets import (
+	semi, space_before_function_paren, keyword_spacing
+)
+# from js_snippet_helpers import (specialRequire)
+from jsSnippetHelpers import (specialRequire)
+
+endglobal
+
+
+
+#--------- VARIABLES ---------
+#_____ Const _____
+snippet c "const" b
+const $1 = ${0:${VISUAL}}
+endsnippet
+
+snippet 'c\.([a-z,A-Z,\-]+)' "const (match) = ..." br
+const `!p snip.rv=match.group(1)` = $0
+endsnippet
+
+snippet ca "const array" b
+const $1 = [
+	${2:${VISUAL}},$0
+]
+endsnippet
+
+snippet cal "const array literal" b
+const $1 = [${2:${VISUAL}}]
+endsnippet
+
+snippet cnew "const new object instance" b
+const $1 = new ${2:`!p snip.rv=t[1].title()`}({
+	$3: $4
+})
+endsnippet
+
+snippet co "const object" b
+const $1 = {
+	$2: ${3:${VISUAL}},$0
+}
+endsnippet
+
+snippet col "const object literal" b
+const $1 = {${2:${VISUAL}}}
+endsnippet
+
+snippet "C(onst)?" "const" br
+const $1 = ${0:'$1'}
+endsnippet
+
+snippet od "Object destruct" w
+const { $1 } = $2
+endsnippet
+
+
+#_____ Let _____
+snippet le "let" b
+let $1 = $2
+endsnippet
+
+
+#_____ Var _____
+snippet v "var" b
+var $1 = ${0:${VISUAL}}
+endsnippet
+
+snippet va "var array" b
+var $1 = [
+	${2:${VISUAL}},$0
+]
+endsnippet
+
+snippet val "var array literal" b
+var $1 = [${2:${VISUAL}}]
+endsnippet
+
+snippet vo "var object" b
+var $1 = {
+	$2: ${3:${VISUAL}},$0
+}
+endsnippet
+
+snippet vol "var object literal" b
+var $1 = {${2:${VISUAL}}}
+endsnippet
+
+
+
+#---------- EQUALITY ----------
+snippet = "Triple equal" w
+$1 === $2
+endsnippet
+
+snippet != "Triple not equal" w
+$1 !== $2
+endsnippet
+
+snippet == "Double equal" w
+$1 == $2
+endsnippet
+
+snippet !== "Double not equal" w
+$1 != $2
+endsnippet
+
+
+
+#---------- RETURN ----------
+snippet ret "Return statement"
+return ${VISUAL}$0`!p snip.rv = semi(snip)`
+endsnippet
+
+snippet ret= "Triple equal" w
+return $1 === $2
+endsnippet
+
+snippet ret== "Double equal" w
+return $1 == $2
+endsnippet
+
+
+
+#---------- TEMPLATE STRING ----------
+snippet ts "Template string" Aw
+${$1}
+endsnippet
+# snippet sym
+# const ${1} = Symbol('${0}');
+# endsnippet
+
+
+
+#---------- MODULE IMPORT/EXPORTS ----------
+#_____ RequireJS Modules _____
+snippet r "Require module" b
+const $2 = require('$1')
+endsnippet
+
+snippet 'r\.([a-z,A-Z,\-,\.]+)' "Require matching name module" br
+const `!p snip.rv=specialRequire(match.group(1))`
+endsnippet
+
+snippet rd "Require & destruct module" b
+const { $2 } = require('$1')
+endsnippet
+
+snippet 'rd\.(\w+)' "Require & destruct named module" br
+const { $1 } = require('`!p snip.rv=match.group(1)`')
+endsnippet
+
+
+#_____ RequireJS Sibling Modules _____
+snippet rs "Require sibling module" b
+const $2 = require('./$1')
+endsnippet
+
+snippet 'rs\.([a-z,A-Z,\-]+)' "Require matching name sibling module" br
+const `!p snip.rv=specialRequire(match.group(1), 'sibling')`
+endsnippet
+
+snippet rsd "Require & destruct sibling module" b
+const { $2 } = require('./$1')
+endsnippet
+
+snippet 'rsd\.(\w+)' "Require & destruct named sibling module" br
+#_____ RequireJS Parent Modules _____
+snippet rp "Require parent module" b
+const $2 = require('../$1')
+endsnippet
+
+snippet 'rp\.([a-z,A-Z,\-]+)' "Require matching name parent module" br
+const `!p snip.rv=specialRequire(match.group(1), 'parent')`
+endsnippet
+
+snippet rpd "Require & destruct parent module" b
+const { $2 } = require('../$1')
+endsnippet
+
+snippet 'rpd\.(\w+)' "Require & destruct named parent module" br
+const { $1 } = require('../`!p snip.rv=match.group(1)`')
+endsnippet
+
+
+#_____ Export RequireJS Modules _____
+snippet me "Module exports object" b
+module.exports = {
+	$1
+}
+endsnippet
+
+snippet 'me\.([a-z,A-Z,\-]+)' "Module exports object value" rb
+module.exports = `!p snip.rv=match.group(1)`
+endsnippet
+
+snippet med "Module exports default" b
+module.exports = $1
+endsnippet
+
+snippet mef "Module exports default function" b
+module.exports = function $1ModuleExport($2) {
+
+}
+endsnippet
+
+
+#_____ Import ES6 Modules _____
+snippet im "Import module" b
+import $1 from '$2'
+endsnippet
+
+snippet 'i\.(\w+)' "Import matching name module" br
+import `!p snip.rv="{0} from '{0}'".format(match.group(1))`
+endsnippet
+
+snippet imd "Import & destruct module" b
+import { $1 } from '$2'
+endsnippet
+
+snippet 'imd\.(\w+)' "Import & destruct named module" br
+import { $1 } from '`!p snip.rv=match.group(1)`'
+endsnippet
+
+snippet imas "Import * as module" b
+import * as ${1} from '${2:$1}'
+endsnippet
+
+snippet 'imas\.(\w+)' "import * as matching name module" b
+import * as $1 from '`!p snip.rv=match.group(1)`'
+endsnippet
+
+snippet ime "Import file then export" b
+import ${1} from '${2:./}${3:$1}'
+
+export ${4:default} $1
+endsnippet
+
+
+#_____ Export ES6 Modules _____
+snippet "e(xport|xp|x)?" "Export" br
+export ${1:default }
+endsnippet
+
+snippet expf "Export function" b
+export ${1:default }function ${2:name}($3) {
+	$4
+}
+endsnippet
+
+
+
+#---------- CONSOLE ----------
+snippet l "log"
+log(${1:${VISUAL}})
+endsnippet
+
+snippet con "console.log(...)"
+console.log(${1:${VISUAL}})
+endsnippet
+
+snippet conw "console.warn(...)"
+console.warn(${1:${VISUAL}})
+endsnippet
+
+snippet clog "const { log } = console" b
+const { log } = console
+endsnippet
+
+
+#---------- OBJECTS ----------
+snippet proto "Prototype (proto)"
+${1:class_name}.prototype.${2:method_name} = function`!p snip.rv = space_before_function_paren(snip)`(${3:first_argument}) {
+	${VISUAL}$0
+}`!p snip.rv = semi(snip)`
+endsnippet
+
+snippet : "Object field value"
+${1:key}: ${2:value},
+endsnippet
+
+snippet :o "field: {...}"
+${1:key}: {
+	${2:key}: ${3:value},
+},
+endsnippet
+
+snippet :a "field: [...]"
+${1:key}: [
+	$2,
+],
+endsnippet
+
+# snippet :f "Object Method" w
+# ${1:method_name} (${2:attribute}) {
+#     ${0:${VISUAL}}
+# },
+# endsnippet
+
+snippet :f "Object method string"
+$1: function $1$2Method($3) {
+	${4:${VISUAL}}
+},
+endsnippet
+
+
+#---------- CLASSES ----------
+snippet cla "Class" b
+class ${1:Name} {
+	${0:${VISUAL}}
+}
+endsnippet
+
+snippet clax "Class extends" b
+class ${1} extends ${2} {
+	${0:${VISUAL}}
+}
+endsnippet
+
+snippet clac "Class with constructor" b
+class ${1} {
+	constructor(${2}) {
+		${0:${VISUAL}}
+	}
+}
+endsnippet
+
+
+#---------- FUNCTIONS ----------
+snippet af "Arrow function" Aw
+(${1}) => {
+	${0:${VISUAL}}
+}
+endsnippet
+
+snippet eaf "Arrow function" Aw
+(${1}) => {
+	${0:${VISUAL}}
+}, (${2:e}) => {
+	$3
+}
+endsnippet
+
+snippet >> "Inline arrow function" Ai
+${1:()} => $0
+endsnippet
+
+snippet l> "Inline arrow function" Aw
+${1:value} => log(${2:$1})
+endsnippet
+
+snippet c> "Const inline arrow function" Ab
+const ${1:name} = ${2:value} => ${3}
+endsnippet
+
+snippet caf "Constant arrow function" Ab
+const ${1:function_name} = (${2}) => {
+	${0:${VISUAL}}
+}
+endsnippet
+
+snippet fun "Named function" w
+function ${1:hello}`!p snip.rv = space_before_function_paren(snip)`(${2:argument}) {
+	${VISUAL}$0
+}
+endsnippet
+
+snippet cf "const named function" w
+const $1 = function ${2:$1}`!p snip.rv = space_before_function_paren(snip)`(${3:argument}) {
+	$0
+}
+endsnippet
+
+snippet anf "Anonymous function" w
+function`!p snip.rv = space_before_function_paren(snip)`($1) {
+	${0:${VISUAL}}
+}
+endsnippet
+
+snippet fun* "Generator" w
+function* ${1:function_name}(${2}) {
+	${0:${VISUAL}}
+}
+endsnippet
+
+snippet vf "Function assigned to var"
+${1:var }${2:function_name} = function $2`!p snip.rv = space_before_function_paren(snip)`($3) {
+	${VISUAL}$0
+}`!p snip.rv = semi(snip)`
+endsnippet
+
+snippet iife "Immediately-Invoked Function Expression (iife)"
+(function`!p snip.rv = space_before_function_paren(snip)`(${1:window}) {
+	${VISUAL}$0
+}(${2:$1}))`!p snip.rv = semi(snip)`
+endsnippet
+
+snippet ;fe "Minify safe iife"
+;(function`!p snip.rv = space_before_function_paren(snip)`(${1}) {
+	${VISUAL}$0
+}(${2}))
+endsnippet
+
+snippet fi "for prop in obj using hasOwnProperty" b
+for`!p snip.rv = keyword_spacing(snip)`(${1:prop} in ${2:obj}){
+	if`!p snip.rv = keyword_spacing(snip)`($2.hasOwnProperty($1)) {
+		${VISUAL}$0
+	}
+}
+endsnippet
+
+
+#---------- MAP FUNCTIONS ----------
+snippet "\.(map|filter|forEach|reduce)" "Array methods" r
+.`!p snip.rv = match.group(1)`(function `!p snip.rv = match.group(1)`${1:functionName}CB($2) {
+	$3
+})
+endsnippet
+
+
+#---------- FLOW CONTROL ----------
+snippet ter "tertiary conditional"
+	${1:/* condition */} ? ${2:/* if true */} : ${0:/* if false */}
+endsnippet
+
+snippet if "if (condition) ..." w
+if`!p snip.rv = keyword_spacing(snip)`($1)
+	${2:${VISUAL}}
+endsnippet
+
+snippet if= "if (value === value) { ... }" w
+if`!p snip.rv = keyword_spacing(snip)`($1 === $2) {
+	${3:${VISUAL}}
+}
+endsnippet
+
+snippet if! "if (value !== value) { ... }" w
+if`!p snip.rv = keyword_spacing(snip)`($1 !== $2) {
+	${0:${VISUAL}}
+}
+endsnippet
+
+snippet ife "if (condition) { ... } else { ... }" w
+if`!p snip.rv = keyword_spacing(snip)`($1) {
+	${2:${VISUAL}}
+} else`!p snip.rv = keyword_spacing(snip)`{
+	$0
+}
+endsnippet
+
+snippet ife= "if (condition === condition) { ... } else { ... }" w
+if`!p snip.rv = keyword_spacing(snip)`($1 === $2) {
+	${3:${VISUAL}}
+} else`!p snip.rv = keyword_spacing(snip)`{
+	$0
+}
+endsnippet
+
+snippet iferr "if (err) { throw ... }" w
+if (${1:err})
+	${2:throw err}
+endsnippet
+
+snippet ifei "if else if (condition) { ... }" w
+if`!p snip.rv = keyword_spacing(snip)`($1) {
+	${2:${VISUAL}}
+} else if`!p snip.rv = keyword_spacing(snip)`($3) {
+	$0
+}
+endsnippet
+
+snippet ifei= "if else if (value === value) { ... }" w
+if`!p snip.rv = keyword_spacing(snip)`($1 === $2) {
+	${3:${VISUAL}}
+} else if`!p snip.rv = keyword_spacing(snip)`(${4:$5 === $6}) {
+	$0
+}
+endsnippet
+
+snippet ifei! "if else if (value !== value) { ... }" w
+if`!p snip.rv = keyword_spacing(snip)`($1 !== $2) {
+	${3:${VISUAL}}
+} else if`!p snip.rv = keyword_spacing(snip)`(${4:$5 !== $6}) {
+	$0
+}
+endsnippet
+
+snippet ifeie "if else if else (condition) { ... }" w
+if`!p snip.rv = keyword_spacing(snip)`($1) {
+	${2:${VISUAL}}
+} else if`!p snip.rv = keyword_spacing(snip)`($3) {
+	$4
+} else {
+	$0
+}
+endsnippet
+
+snippet ifeie= "if else if else (value === value) { ... }" w
+if`!p snip.rv = keyword_spacing(snip)`($1 === $2) {
+	${3:${VISUAL}}
+} else if`!p snip.rv = keyword_spacing(snip)`(${4:$5 === $6}) {
+	$7
+} else {
+	$0
+}
+endsnippet
+
+snippet ifeie! "if else if else (value !== value) { ... }" w
+if`!p snip.rv = keyword_spacing(snip)`($1 !== $2) {
+	${3:${VISUAL}}
+} else if`!p snip.rv = keyword_spacing(snip)`(${4:$5 !== $6}) {
+	$7
+} else {
+	$0
+}
+endsnippet
+
+snippet ei "else if (condition) { ... }" w
+else if`!p snip.rv=keyword_spacing(snip)`($1) {
+	${0:${VISUAL}}
+}
+endsnippet
+
+snippet ei= "else if (value === value) { ... }" w
+else if`!p snip.rv=keyword_spacing(snip)`($1 === $2) {
+	${0:${VISUAL}}
+}
+endsnippet
+
+snippet ei! "else if (value !== value) { ... }" w
+else if`!p snip.rv=keyword_spacing(snip)`($1 !== $2) {
+	${0:${VISUAL}}
+}
+endsnippet
+
+snippet el "else { ... }" w
+else {
+	${0:${VISUAL}}
+}
+endsnippet
+
+snippet switch "Switch case" w
+switch`!p snip.rv=keyword_spacing(snip)`(${1:expression}) {
+	case '${VISUAL}${2:case}':
+		$3
+		break`!p snip.rv = semi(snip)`
+	$4
+	default:
+		$0
+}
+endsnippet
+
+snippet case "case 'xyz': ... break" w
+case`!p snip.rv = keyword_spacing(snip)`'${VISUAL}${1:case}':
+	${VISUAL}$0
+	break`!p snip.rv = semi(snip)`
+endsnippet
+
+snippet do "do { ... } while (condition)" w
+do`!p snip.rv = keyword_spacing(snip)`{
+	${VISUAL}$0
+}`!p snip.rv = keyword_spacing(snip)`while`!p snip.rv = keyword_spacing(snip)`(${1:/* condition */})`!p snip.rv = semi(snip)`
+endsnippet
+
+snippet foro "for (const prop of object}) { ... }" w
+for (const ${1:prop} of ${2:object}) {
+	${0:$1}
+}
+endsnippet
+
+snippet forof "For of loop" w
+for (let ${1:value} of ${2:iterable}) {
+	${3:$1}
+}
+endsnippet
+
+
+#---------- ERROR HANDLING ----------
+snippet terr "Throw error"
+throw new Error('${1:error message}')
+endsnippet
+
+snippet try "try { ... } catch(error) { ... }"
+try {
+	${1:${VISUAL}}
+} catch (error) {
+	$2
+}
+endsnippet
+
+snippet tryf "try { ... } catch(e) { ... } finally { ... }"
+try {
+	${0:${VISUAL}}
+} catch (${1:e}) {
+	${2:/* handle error */}
+} finally {
+	${3:/* be executed regardless of the try / catch result*/}
+}
+endsnippet
+
+
+#---------- DOM SELECTORS ----------
+snippet get "Get elements"
+	getElementsBy${1:TagName}('${0}')
+endsnippet
+
+snippet gett "Get element"
+	getElementBy${1:Id}('${0}')
+endsnippet
+
+snippet by. "Elements by class"
+	${1:document}.getElementsByClassName('${0:class}')
+endsnippet
+
+snippet by# "Element by ID"
+	${1:document}.getElementById('${0:element ID}')
+endsnippet
+
+snippet qs "Query selector"
+	${1:document}.querySelector('${0:CSS selector}')
+endsnippet
+
+snippet qsa "Query selector all"
+	${1:document}.querySelectorAll('${0:CSS selector}')
+endsnippet
+
+
+#--------- JSON ---------
+snippet jsonp "JSON parse" i
+JSON.parse(${0:${VISUAL}})
+endsnippet
+
+snippet jsons "JSON stringify" i
+JSON.stringify(${0:${VISUAL}})
+endsnippet
+
+snippet pretty "JSON pretty print" i
+JSON.stringify(${0:${VISUAL}}, undefined, 2)
+endsnippet
+
+#---------- TIMERS ----------
+snippet timeout "setTimeout function"
+setTimeout(function $1() {
+	$0
+}, ${2:1000})
+endsnippet
+
+snippet interval "setInterval function"
+setInterval(function $1() {
+	$0
+}, ${2:1000})
+endsnippet
+
+
+#---------- PROMISES ----------
+snippet prom "Promise" w
+new Promise((resolve, reject) => {
+	$0
+})
+endsnippet
+
+snippet "\.th(en)?" "Promise .then()" ri
+.then((${1:result}) => {
+	${0:${VISUAL}}
+})
+snippet "\.th(en)?" "Promise .then()" ri
+.then((${1:result}) => {
+	${0:${VISUAL}}
+})
+endsnippet
+
+snippet "\.ca(tch)?" "Promise .catch()" ri
+.catch((${1:err}) => {
+	${0:${VISUAL}}
+})
+endsnippet
+
+snippet .thenc "Promise .then().catch()" i
+.then((${1:result}) => {
+	${2:${VISUAL}}
+})
+.catch((${3:error}) => {
+	$0
+})
+endsnippet
+
+
+#---------- DOCUMENTATION ----------
+snippet /** "Docstring"
+/**
+* ${0:description}
+*
+*/
+endsnippet
+
+snippet @par "@param docs"
+@param {${1:type}} ${2:name} ${0:description}
+endsnippet
+
+snippet @ret "@return docs"
+@return {${1:type}} ${0:description}
+endsnippet
+
+snippet strict "'use strict'" b
+'use strict'`!p snip.rv = semi(snip)`
+endsnippet

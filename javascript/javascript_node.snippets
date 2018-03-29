@@ -1,0 +1,164 @@
+priority -50
+
+snippet #! "shebang"
+#!/usr/bin/env node
+endsnippet
+
+
+# PROCESS VARIABLES --------------------------------------------------
+snippet pr "process." w
+process.$0
+endsnippet
+
+snippet pr.a "process.argv." w
+process.argv.$0
+endsnippet
+
+#----- Process Environment Variables -----------------------------------
+snippet pr.e "process.env." w
+process.env.$0
+endsnippet
+
+snippet pr.ep "process.env.PORT" w
+process.env.PORT = ${0:3000}
+endsnippet
+
+snippet pr.en "process.env.NODE_ENV" w
+process.env.NODE_ENV = ${0:'development'}
+endsnippet
+
+snippet pr.muri "process.env.MONGODB_URI" w
+process.env.MONGODB_URI = ${0:${VISUAL}}
+endsnippet
+
+
+#----- Process Hooks --------------------------------------------------
+snippet pr.o "process.on()" w
+process.on('$1', function ${2:onProcess}$4($5) {
+	${0:${VISUAL}}
+})
+endsnippet
+
+snippet pr.out "stdout" w
+process.stdout.${1:write($2)}
+endsnippet
+
+snippet pr.in "stdin" w
+process.stdin.$0
+endsnippet
+
+snippet pr.std "stderr" w
+process.stderr
+endsnippet
+
+snippet hcs "http.createServer"
+http.createServer($1).listen($2)$0
+endsnippet
+
+snippet ncs "net.createServer"
+net.createServer(function(${1:socket}){
+	$1.on('data', function(${3:data}){
+		$4
+	})
+	$1.on('end', function(){
+		$5
+	})
+}).listen(${6:8124})
+endsnippet
+
+snippet pipe "pipe"
+pipe(${1:stream})$2
+endsnippet
+
+
+#---------- EXPRESS ----------
+snippet ex.app "express GET"
+const app = express()
+endsnippet
+
+snippet ex.get "express GET"
+app.get('/$1', function get${2:`!p snip.rv=t[1].title()`}CB(req, res) {
+	${0:${VISUAL}}
+})
+endsnippet
+
+snippet ex.post "express POST"
+app.post('/$1', function post${2:`!p snip.rv=t[1].title()`}CB(req, res) {
+	${0:${VISUAL}}
+})
+endsnippet
+
+snippet ex.put "express PUT"
+app.put('/$1', function put${2:functionName}CB(req, res) {
+	${0:${VISUAL}}
+})
+endsnippet
+
+snippet ex.pat "express PATCH"
+app.patch('/$1', function patch${2:functionName}CB(req, res) {
+	${0:${VISUAL}}
+})
+endsnippet
+
+snippet ex.del "express DELETE"
+app.delete('/$1', function delete${2:functionName}CB(req, res) {
+	${0:${VISUAL}}
+})
+endsnippet
+
+snippet ex.f "Express function" iA
+function $1CB(req, res) {
+	$0
+}
+endsnippet
+
+snippet ex.mf "Express const middleware function" b 
+const $1 = function $1CB(req, res, next) {
+	$0
+
+	next()
+}
+endsnippet
+
+snippet ex.s "Express send"
+res.send($1)
+endsnippet
+
+snippet ex.stat "Express send"
+res.status(${1:400}).send($2)
+endsnippet
+
+snippet ex.r "Express render"
+res.render('$1.hbs', {
+	$2: $3,$0
+})
+endsnippet
+
+snippet ex.use "Express middleware"
+app.use(${1:function ${2:functionName}(req, res, next) {
+	$0
+	${3:next()}
+}})
+endsnippet
+
+snippet ex.listen "app.listen" b
+app.listen(${1:3000}, function appListenCB() {
+	console.log('Server is listening on port $1')
+})
+endsnippet
+
+snippet ex.pb "Require express boilerplate" b
+const express = require('express')
+
+
+const app = express()
+
+app.get('/$1', (req, res) => {
+	res.${2:send}($3)
+})
+
+
+app.listen(${4:3000}, () => {
+	console.log('Server listening on port $4')
+})
+endsnippet
