@@ -1,35 +1,31 @@
+
+#-- DESCRIBE ---------------------------------------------------------
 snippet des "describe('thing', () => { ... })" b
-describe('${1:}', () => {
+describe('$1', () => {
 	it('$2', (${3:done}) => {
 		${0:${VISUAL}}
 	})
 })
 endsnippet
 
-snippet it "it('should do', () => { ... })" b
-it('${1:}', (${2:done}) => {
+
+
+#-- IT ---------------------------------------------------------------
+snippet it "it('should...', ([done]) => { ... })" b
+it('${1:should $2}', (${3:done}) => {
 	${0:${VISUAL}}
 })
 endsnippet
 
-snippet xit "xit('should do', () => { ... })" b
-xit('${1:}', () => {
+snippet xit "xit('should...', ([done]) => { ... })" b
+xit('${1:should $2}', (${3:done}) => {
 	${0:${VISUAL}}
 })
 endsnippet
 
-snippet bef "before(() => { ... })" b
-before(() => {
-	${0:${VISUAL}}
-})
-endsnippet
 
-snippet befe "beforeEach(() => { ... })" b
-beforeEach((${1:done}) => {
-	${0:${VISUAL}}
-})
-endsnippet
 
+#-- HOOKS ------------------------------------------------------------
 snippet aft "after(() => { ... })" b
 after(() => {
 	${0:${VISUAL}}
@@ -42,8 +38,21 @@ afterEach(() => {
 })
 endsnippet
 
+snippet bef "before(([done]) => { ... })" b
+before((${1:done}) => {
+	${0:${VISUAL}}
+})
+endsnippet
 
-# EXPECT ------------------------------------------------------------
+snippet befe "beforeEach(([done]) => { ... })" b
+beforeEach((${1:done}) => {
+	${0:${VISUAL}}
+})
+endsnippet
+
+
+
+#-- EXPECT -----------------------------------------------------------
 snippet exp "expect()" i
 expect($1)
 endsnippet
@@ -61,15 +70,16 @@ expect($1).toBeDefined()
 endsnippet
 
 snippet exp.tex "expect(...).to.equal(...)" b
-expect($1).to.equal($0)
+expect($1).to.equal($2)
 endsnippet
 
 snippet exp.tde "expect(...).to.deep.equal(...)" b
-expect($1).to.deep.equal($0)
+expect($1).to.deep.equal($2)
 endsnippet
 
 
-# SUPERTEST ----------------------------------------------------------
+
+#-- SUPERTEST --------------------------------------------------------
 snippet st. ".expect()" b
 .expect($1)
 endsnippet
@@ -114,4 +124,3 @@ snippet st.end ".expect((res) => {...})" b
 	$0
 })
 endsnippet
-
