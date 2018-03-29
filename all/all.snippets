@@ -1,13 +1,3 @@
-global !p
-import sys
-customPath = '/Users/marc/.config/marcsCoolSnippets/pythonx'
-if customPath not in sys.path: sys.path.append(customPath)
-
-from snippet_helpers import *
-from helper import hello
-endglobal
-
-
 snippet filename "Complete path to current file" b
 `!p snip.rv=snip.fn`
 endsnippet
@@ -16,6 +6,6 @@ snippet basename "Complete path to current file" b
 `!p snip.rv=snip.basename`
 endsnippet
 
-snippet t
-`!p snip.rv='yes'`
+snippet test "Test snippet" b
+`!p snip.rv='Test worked!'`
 endsnippet
