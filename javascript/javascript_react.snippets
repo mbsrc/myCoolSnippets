@@ -1,4 +1,5 @@
-#----- React imports -----
+
+#-- REACT IMPORTS ----------------------------------------------------
 snippet ri "Import react" b
 import React from 'react'
 endsnippet
@@ -22,7 +23,7 @@ endsnippet
 
 
 
-#----- Props -----
+#-- PROPS ------------------------------------------------------------
 snippet rtp "Get property" i
 this.props.${1}
 endsnippet
@@ -47,7 +48,7 @@ endsnippet
 
 
 
-#----- PropTypes -----
+#-- PROPTYPES --------------------------------------------------------
 snippet rcpt "Proptypes"
 static propTypes = {
 	${1}: PropTypes.${0},
@@ -125,7 +126,8 @@ isRequired,
 endsnippet
 
 
-#----- State -----
+
+#-- REACT STATE ------------------------------------------------------
 snippet st "State" b
 state = {
 	${1}: ${2},
@@ -144,7 +146,7 @@ endsnippet
 
 
 
-#----- React methods -----
+#-- REACT METHODS ----------------------------------------------------
 snippet rcon "React constructor" b
 constructor(props) {
 	super(props)
@@ -211,7 +213,7 @@ endsnippet
 
 
 
-#----- React classes -----
+#-- CLASS COMPONENTS -------------------------------------------------
 snippet rc "React class"
 class ${1:MyComponent} extends Component {
 	render() {
@@ -292,7 +294,7 @@ endsnippet
 
 
 
-#----- Functional components -----
+#-- FUNCTIONAL COMPONENTS --------------------------------------------
 snippet rfc "React Functional Component" b
 import React from 'react'
 import PropTypes from 'prop-types'
@@ -311,7 +313,6 @@ $1.propTypes = {}
 
 export default $1
 endsnippet
-
 
 snippet rcom "Functional component"
 const = props => {
@@ -335,7 +336,7 @@ endsnippet
 
 
 
-#----- Styled components -----
+#-- STYLED COMPONENTS ------------------------------------------------
 snippet rsc "React Styled Component" b
 import styled from 'styled-components'
 
@@ -360,7 +361,7 @@ endsnippet
 
 
 
-#----- React DOM -----
+#-- REACT DOM --------------------------------------------------------
 snippet rdr
 ReactDOM.render(${1}, ${2})
 endsnippet
