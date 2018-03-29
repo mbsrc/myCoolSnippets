@@ -6,6 +6,10 @@ snippet basename "Complete path to current file" b
 `!p snip.rv=snip.basename`
 endsnippet
 
-snippet test "Test snippet" b
-`!p snip.rv='Test worked!'`
+snippet header "Snippet header" b
+#-- ${1:`!p t[1]=t[1].upper()`} `!p snip.rv="-" * (64 - len(t[1]))`
+endsnippet
+
+snippet subheader "Test snippet" b
+#`!p snip.rv="-" * (64 - len(t[1]))` $1 --
 endsnippet
