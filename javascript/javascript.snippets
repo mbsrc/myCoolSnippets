@@ -1,9 +1,3 @@
-priority -50
-
-############
-#  COMMON  #
-############
-
 # The smart snippets use a global options called
 # "g:ultisnips_javascript.{option}" which can control the format
 # of trailing semicolon, space before function paren, etc.
@@ -16,7 +10,8 @@ priority -50
 #      \ }
 
 
-#---------- SNIPPET GLOBALS ----------
+
+#-- SNIPPET GLOBALS --------------------------------------------------
 global !p
 from javascript_snippets import (
 	semi, space_before_function_paren, keyword_spacing
@@ -28,8 +23,8 @@ endglobal
 
 
 
-#--------- VARIABLES ---------
-#_____ Const _____
+#-- VARIABLES --------------------------------------------------------
+#------------------------------------------------------------ Const --
 snippet c "const" b
 const $1 = ${0:${VISUAL}}
 endsnippet
@@ -73,13 +68,13 @@ const { $1 } = $2
 endsnippet
 
 
-#_____ Let _____
+#-------------------------------------------------------------- Let --
 snippet le "let" b
 let $1 = $2
 endsnippet
 
 
-#_____ Var _____
+#-------------------------------------------------------------- Var --
 snippet v "var" b
 var $1 = ${0:${VISUAL}}
 endsnippet
@@ -106,8 +101,8 @@ endsnippet
 
 
 
-#---------- EQUALITY ----------
-snippet = "Triple equal" w
+#-- EQUALITY CHECKS --------------------------------------------------
+snippet = "Triple equal (most common)" w
 $1 === $2
 endsnippet
 
@@ -115,17 +110,17 @@ snippet != "Triple not equal" w
 $1 !== $2
 endsnippet
 
-snippet == "Double equal" w
+snippet == "Double equal (number type-casting)" w
 $1 == $2
 endsnippet
 
-snippet !== "Double not equal" w
+snippet !== "Double not equal (number type-casting)" w
 $1 != $2
 endsnippet
 
 
 
-#---------- RETURN ----------
+#-- RETURN -----------------------------------------------------------
 snippet ret "Return statement"
 return ${VISUAL}$0`!p snip.rv = semi(snip)`
 endsnippet
@@ -140,90 +135,19 @@ endsnippet
 
 
 
-#---------- TEMPLATE STRING ----------
-snippet ts "Template string" Aw
+#-- TEMPLATE STRINGS ------------------------------------------------
+snippet ts "Template string" i
+\`$1${$2}\`
+endsnippet
+
+snippet tss "Template string variable" Aw
 ${$1}
 endsnippet
-# snippet sym
-# const ${1} = Symbol('${0}');
-# endsnippet
 
 
 
-#---------- MODULE IMPORT/EXPORTS ----------
-#_____ RequireJS Modules _____
-snippet r "Require module" b
-const $2 = require('$1')
-endsnippet
-
-snippet 'r\.([a-z,A-Z,\-,\.]+)' "Require matching name module" br
-const `!p snip.rv=specialRequire(match.group(1))`
-endsnippet
-
-snippet rd "Require & destruct module" b
-const { $2 } = require('$1')
-endsnippet
-
-snippet 'rd\.(\w+)' "Require & destruct named module" br
-const { $1 } = require('`!p snip.rv=match.group(1)`')
-endsnippet
-
-
-#_____ RequireJS Sibling Modules _____
-snippet rs "Require sibling module" b
-const $2 = require('./$1')
-endsnippet
-
-snippet 'rs\.([a-z,A-Z,\-]+)' "Require matching name sibling module" br
-const `!p snip.rv=specialRequire(match.group(1), 'sibling')`
-endsnippet
-
-snippet rsd "Require & destruct sibling module" b
-const { $2 } = require('./$1')
-endsnippet
-
-snippet 'rsd\.(\w+)' "Require & destruct named sibling module" br
-#_____ RequireJS Parent Modules _____
-snippet rp "Require parent module" b
-const $2 = require('../$1')
-endsnippet
-
-snippet 'rp\.([a-z,A-Z,\-]+)' "Require matching name parent module" br
-const `!p snip.rv=specialRequire(match.group(1), 'parent')`
-endsnippet
-
-snippet rpd "Require & destruct parent module" b
-const { $2 } = require('../$1')
-endsnippet
-
-snippet 'rpd\.(\w+)' "Require & destruct named parent module" br
-const { $1 } = require('../`!p snip.rv=match.group(1)`')
-endsnippet
-
-
-#_____ Export RequireJS Modules _____
-snippet me "Module exports object" b
-module.exports = {
-	$1
-}
-endsnippet
-
-snippet 'me\.([a-z,A-Z,\-]+)' "Module exports object value" rb
-module.exports = `!p snip.rv=match.group(1)`
-endsnippet
-
-snippet med "Module exports default" b
-module.exports = $1
-endsnippet
-
-snippet mef "Module exports default function" b
-module.exports = function $1ModuleExport($2) {
-
-}
-endsnippet
-
-
-#_____ Import ES6 Modules _____
+#-- ES6 MODULE IMPORTS/EXPORTS ---------------------------------------
+#--------------------------------------------------- Module Imports --
 snippet im "Import module" b
 import $1 from '$2'
 endsnippet
@@ -255,7 +179,7 @@ export ${4:default} $1
 endsnippet
 
 
-#_____ Export ES6 Modules _____
+#--------------------------------------------------- Module Exports --
 snippet "e(xport|xp|x)?" "Export" br
 export ${1:default }
 endsnippet
@@ -268,7 +192,7 @@ endsnippet
 
 
 
-#---------- CONSOLE ----------
+#-- CONSOLE ----------------------------------------------------------
 snippet l "log"
 log(${1:${VISUAL}})
 endsnippet
@@ -286,7 +210,8 @@ const { log } = console
 endsnippet
 
 
-#---------- OBJECTS ----------
+
+#-- OBJECTS ----------------------------------------------------------
 snippet proto "Prototype (proto)"
 ${1:class_name}.prototype.${2:method_name} = function`!p snip.rv = space_before_function_paren(snip)`(${3:first_argument}) {
 	${VISUAL}$0
@@ -309,20 +234,21 @@ ${1:key}: [
 ],
 endsnippet
 
-# snippet :f "Object Method" w
-# ${1:method_name} (${2:attribute}) {
-#     ${0:${VISUAL}}
-# },
-# endsnippet
-
-snippet :f "Object method string"
+snippet :f "Object method"
 $1: function $1$2Method($3) {
 	${4:${VISUAL}}
 },
 endsnippet
 
+snippet :sf "Object method - short form" w
+${1:method_name} (${2:attribute}) {
+	${0:${VISUAL}}
+},
+endsnippet
 
-#---------- CLASSES ----------
+
+
+#-- CLASSES ----------------------------------------------------------
 snippet cla "Class" b
 class ${1:Name} {
 	${0:${VISUAL}}
@@ -344,7 +270,8 @@ class ${1} {
 endsnippet
 
 
-#---------- FUNCTIONS ----------
+
+#-- FUNCITONS --------------------------------------------------------
 snippet af "Arrow function" Aw
 (${1}) => {
 	${0:${VISUAL}}
@@ -428,7 +355,8 @@ for`!p snip.rv = keyword_spacing(snip)`(${1:prop} in ${2:obj}){
 endsnippet
 
 
-#---------- MAP FUNCTIONS ----------
+
+#-- FUNCTION MAPS ----------------------------------------------------
 snippet "\.(map|filter|forEach|reduce)" "Array methods" r
 .`!p snip.rv = match.group(1)`(function `!p snip.rv = match.group(1)`${1:functionName}CB($2) {
 	$3
@@ -436,7 +364,8 @@ snippet "\.(map|filter|forEach|reduce)" "Array methods" r
 endsnippet
 
 
-#---------- FLOW CONTROL ----------
+
+#-- FLOW CONTROL -----------------------------------------------------
 snippet ter "tertiary conditional"
 	${1:/* condition */} ? ${2:/* if true */} : ${0:/* if false */}
 endsnippet
@@ -593,7 +522,8 @@ for (let ${1:value} of ${2:iterable}) {
 endsnippet
 
 
-#---------- ERROR HANDLING ----------
+
+#-- ERROR HANDLING ---------------------------------------------------
 snippet terr "Throw error"
 throw new Error('${1:error message}')
 endsnippet
@@ -617,7 +547,8 @@ try {
 endsnippet
 
 
-#---------- DOM SELECTORS ----------
+
+#-- DOM SELECTORS ----------------------------------------------------
 snippet get "Get elements"
 	getElementsBy${1:TagName}('${0}')
 endsnippet
@@ -643,7 +574,8 @@ snippet qsa "Query selector all"
 endsnippet
 
 
-#--------- JSON ---------
+
+#-- JSON -------------------------------------------------------------
 snippet jsonp "JSON parse" i
 JSON.parse(${0:${VISUAL}})
 endsnippet
@@ -656,7 +588,9 @@ snippet pretty "JSON pretty print" i
 JSON.stringify(${0:${VISUAL}}, undefined, 2)
 endsnippet
 
-#---------- TIMERS ----------
+
+
+#-- TIMERS -----------------------------------------------------------
 snippet timeout "setTimeout function"
 setTimeout(function $1() {
 	$0
@@ -670,7 +604,8 @@ setInterval(function $1() {
 endsnippet
 
 
-#---------- PROMISES ----------
+
+#-- PROMISES ---------------------------------------------------------
 snippet prom "Promise" w
 new Promise((resolve, reject) => {
 	$0
@@ -703,7 +638,8 @@ snippet .thenc "Promise .then().catch()" i
 endsnippet
 
 
-#---------- DOCUMENTATION ----------
+
+#-- DOCUMENTATION ----------------------------------------------------
 snippet /** "Docstring"
 /**
 * ${0:description}
