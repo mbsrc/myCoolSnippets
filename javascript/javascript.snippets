@@ -18,9 +18,7 @@ priority -50
 
 #---------- SNIPPET GLOBALS ----------
 global !p
-import sys
-customPath = '/Users/marc/.config/marcsCoolSnippets/pythonx'
-if customPath not in sys.path: sys.path.append(customPath)
+import GlobalSnippetsConfig
 
 from javascript_snippets import (
 	semi, space_before_function_paren, keyword_spacing
