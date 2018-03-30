@@ -2,10 +2,11 @@ fileTypeCommentSymbols = {
     'js': '//',
     'py': '#',
     'sh': '#',
-    'vim': '#',
+    'vim': '"',
     'conf': '#',
     'tmux': '#',
     'snippets': '#',
+    'gitconfig': '#',
 }
 
 def commentSymbol(fileType):
@@ -13,5 +14,9 @@ def commentSymbol(fileType):
     return fileTypeCommentSymbols[fileType]
 
 
-def titlePadding(tabstop):
-    return "-" * (65 - len(tabstop))
+def titlePadding(tabstop, foldType=None):
+    paddingSize = 65
+
+    if foldType == 'm': paddingSize = 62
+
+    return "-" * (paddingSize - len(tabstop))
