@@ -44,3 +44,15 @@ ${0:${VISUAL}}
 `!p snip.rv=commentSymbol(snip)` }}}
 endsnippet
 
+
+#--------------------------------------------------------- Dividers --
+snippet divider "Section divider"
+`!p line = vim.current.line
+lineLen = len(line)
+tabs = (lineLen - len(line.lstrip('\t'))) * 2
+spaces = lineLen - len(line.lstrip(' '))
+symbol = commentSymbol(snip)
+if lineLen < 70:
+	snip.rv=symbol + ' ' + ((69 - spaces - tabs - len(symbol)) * '*')
+`
+endsnippet
