@@ -18,29 +18,29 @@ endsnippet
 
 
 
-snippet header "Snippet header" b
-`!p snip.rv=commentSymbol(snip.ft)`-- ${1:`!p t[1]=t[1].upper()`} `!p snip.rv=titlePadding(t[1])`
 #-- SECTIONS ---------------------------------------------------------
 #---------------------------------------------------------- Headers --
+snippet header "Header" b
+`!p snip.rv=commentSymbol(snip)`-- ${1:`!p t[1]=t[1].upper()`} `!p titlePadding(t[1], snip)`
 endsnippet
 
-snippet header.f "Snippet header with fold marker" b
-`!p snip.rv=commentSymbol(snip.ft)`-- ${1:`!p t[1]=t[1].upper()`} `!p snip.rv=titlePadding(t[1], 'm')`{{{
+snippet header.f "Header with fold marker" b
+`!p snip.rv=commentSymbol(snip)`-- ${1:`!p t[1]=t[1].upper()`} `!p titlePadding(t[1], snip, 'm')`{{{
 ${0:${VISUAL}}
 
-`!p snip.rv=commentSymbol(snip.ft)` }}}
+`!p snip.rv=commentSymbol(snip)` }}}
 endsnippet
 
-`!p snip.rv=commentSymbol(snip.ft) + titlePadding(t[1])` ${1:`!p t[1]=t[1].title()`} --
 
 #------------------------------------------------------ Sub-Headers --
 snippet subheader "Subheader" b
+`!p snip.rv=commentSymbol(snip)``!p titlePadding(t[1], snip)` ${1:`!p t[1]=t[1].title()`} --
 endsnippet
 
-snippet subheader.f "Snippet subheader with fold marker" b
-`!p snip.rv=commentSymbol(snip.ft) + titlePadding(t[1], 'm')` ${1:`!p t[1]=t[1].title()`} --{{{
+snippet subheader.f "Subheader with fold marker" b
+`!p snip.rv=commentSymbol(snip) + titlePadding(t[1], snip, 'm')` ${1:`!p t[1]=t[1].title()`} --{{{
 ${0:${VISUAL}}
 
-`!p snip.rv=commentSymbol(snip.ft)` }}}
+`!p snip.rv=commentSymbol(snip)` }}}
 endsnippet
 

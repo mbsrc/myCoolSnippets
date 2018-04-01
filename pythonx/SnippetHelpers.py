@@ -1,5 +1,7 @@
 fileTypeCommentSymbols = {
-    'js': '//',
+    'javascript': '//',
+    'javascript.jsx': '//',
+    'jsx': '//',
     'py': '#',
     'sh': '#',
     'vim': '"',
@@ -9,14 +11,14 @@ fileTypeCommentSymbols = {
     'gitconfig': '#',
 }
 
-def commentSymbol(fileType):
-    if fileType not in fileTypeCommentSymbols: return ""
-    return fileTypeCommentSymbols[fileType]
+def commentSymbol(snip):
+    if snip.ft not in fileTypeCommentSymbols: return ""
+    return fileTypeCommentSymbols[snip.ft]
 
 
-def titlePadding(tabstop, foldType=None):
-    paddingSize = 65
+def titlePadding(tabstop, snip, foldType=None):
+    paddingSize = 66
+    commentLen = len(commentSymbol(snip))
+    if foldType == 'm': paddingSize = 63
 
-    if foldType == 'm': paddingSize = 62
-
-    return "-" * (paddingSize - len(tabstop))
+    snip.rv = "-" * (paddingSize - len(tabstop) - commentLen)
