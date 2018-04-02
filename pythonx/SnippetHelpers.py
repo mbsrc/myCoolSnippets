@@ -5,6 +5,7 @@ fileTypeCommentSymbols = {
     'py': '#',
     'sh': '#',
     'vim': '"',
+    'zsh': '#',
     'conf': '#',
     'tmux': '#',
     'snippets': '#',
