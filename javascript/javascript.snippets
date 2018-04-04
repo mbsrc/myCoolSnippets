@@ -43,6 +43,12 @@ snippet cal "const array literal" b
 const $1 = [${2:${VISUAL}}]
 endsnippet
 
+snippet cao "const array of objects" b
+const $1 = [{
+	$2: ${3:${VISUAL}},$0
+}]
+endsnippet
+
 snippet cnew "const new object instance" b
 const $1 = new ${2:`!p snip.rv=t[1].title()`}(${3:{
 	$4: $5
