@@ -281,14 +281,18 @@ endsnippet
 
 
 
-snippet af "Arrow function" Aw
 #-- FUNCTIONS --------------------------------------------------------
+snippet >> "Inline arrow function" Ai
+${1:()} => $0
+endsnippet
+
+snippet b> "Inline arrow function block" Aw
 (${1}) => {
 	${0:${VISUAL}}
 }
 endsnippet
 
-snippet eaf "Arrow function" Aw
+snippet be> "Inline arrow function block with error" Aw
 (${1}) => {
 	${0:${VISUAL}}
 }, (${2:e}) => {
@@ -296,19 +300,15 @@ snippet eaf "Arrow function" Aw
 }
 endsnippet
 
-snippet >> "Inline arrow function" Ai
-${1:()} => $0
-endsnippet
-
-snippet l> "Inline arrow function" Aw
+snippet l> "Inline arrow function log" Aw
 ${1:value} => log(${2:$1})
 endsnippet
 
-snippet c> "Const inline arrow function" Ab
+snippet e> "Arrow function expression" Ab
 const ${1:name} = ${2:value} => ${3}
 endsnippet
 
-snippet caf "Constant arrow function" Ab
+snippet eb> "Arrow function block expression" Ab
 const ${1:function_name} = (${2}) => {
 	${0:${VISUAL}}
 }
