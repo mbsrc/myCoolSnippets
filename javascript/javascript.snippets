@@ -314,6 +314,11 @@ const ${1:function_name} = (${2}) => {
 }
 endsnippet
 
+snippet fs "Self-referencing function expression" w
+const $1 = function ${2:$1}($3) {
+	${0:${VISUAL}}
+}
+endsnippet
 
 snippet f "Function declaration" w
 function $1($2) {
