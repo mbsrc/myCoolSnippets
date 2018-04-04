@@ -44,9 +44,9 @@ const $1 = [${2:${VISUAL}}]
 endsnippet
 
 snippet cnew "const new object instance" b
-const $1 = new ${2:`!p snip.rv=t[1].title()`}({
-	$3: $4
-})
+const $1 = new ${2:`!p snip.rv=t[1].title()`}(${3:{
+	$4: $5
+}})
 endsnippet
 
 snippet co "const object" b
