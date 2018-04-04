@@ -381,6 +381,12 @@ snippet ter "tertiary conditional"
 endsnippet
 
 snippet if "if (condition) ..." w
+if`!p snip.rv = keyword_spacing(snip)`($1) {
+	${2:${VISUAL}}
+}
+endsnippet
+
+snippet ifs "if short form: if (condition) ..." w
 if`!p snip.rv = keyword_spacing(snip)`($1)
 	${2:${VISUAL}}
 endsnippet
