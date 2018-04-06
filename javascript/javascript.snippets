@@ -384,18 +384,17 @@ if`!p snip.rv = keyword_spacing(snip)`($1) {
 endsnippet
 
 snippet ifs "if short form: if (condition) ..." w
-if`!p snip.rv = keyword_spacing(snip)`($1)
-	${2:${VISUAL}}
+if ($1) ${2:return} ${0:${VISUAL}}
 endsnippet
 
 snippet if= "if (value === value) { ... }" w
-if`!p snip.rv = keyword_spacing(snip)`($1 === $2) {
+if ($1 === $2) {
 	${3:${VISUAL}}
 }
 endsnippet
 
 snippet if! "if (value !== value) { ... }" w
-if`!p snip.rv = keyword_spacing(snip)`($1 !== $2) {
+if ($1 !== $2) {
 	${0:${VISUAL}}
 }
 endsnippet
