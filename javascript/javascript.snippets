@@ -331,6 +331,12 @@ function $1 ($2) {
 }
 endsnippet
 
+snippet 'f\.([a-z,A-Z,0-1]+)' "Function declaration match" wr
+function `!p snip.rv=match.group(1)` ($1) {
+	${0:${VISUAL}}
+}
+endsnippet
+
 #-------------------------------------- Async Function Declarations --
 snippet af "Async function declaration" w
 async function $1($2) {
