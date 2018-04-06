@@ -326,7 +326,14 @@ endsnippet
 
 #-------------------------------------------- Function Declarations --
 snippet f "Function declaration" w
-function $1($2) {
+function $1 ($2) {
+	${0:${VISUAL}}
+}
+endsnippet
+
+#-------------------------------------- Async Function Declarations --
+snippet af "Async function declaration" w
+async function $1($2) {
 	${0:${VISUAL}}
 }
 endsnippet
