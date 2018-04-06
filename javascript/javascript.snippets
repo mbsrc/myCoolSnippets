@@ -415,9 +415,15 @@ if`!p snip.rv = keyword_spacing(snip)`($1 === $2) {
 }
 endsnippet
 
-snippet iferr "if (err) { throw ... }" w
-if (${1:err})
+snippet ifer "if (err) { throw ... }" w
+if (${1:error}) {
 	${2:throw err}
+
+}
+endsnippet
+
+snippet ifers "if (error) throw error " w
+if (${1:error}) throw $1
 endsnippet
 
 snippet ifei "if else if (condition) { ... }" w
