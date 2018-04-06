@@ -73,7 +73,7 @@ snippet od "Object destruct" w
 const { $1 } = $2
 endsnippet
 
-snippet 'od\.([a-z,A-Z,\-]+)' "const { ... } = (match)" br
+snippet 'od\.([a-z,A-Z,\-,\.]+)' "const { ... } = (match)" br
 const { $1 } = `!p snip.rv=match.group(1)`
 endsnippet
 
