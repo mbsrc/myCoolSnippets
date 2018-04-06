@@ -21,7 +21,7 @@ snippet r "Require module" b
 const $2 = require('$1')
 endsnippet
 
-snippet 'r\.([a-z,A-Z,\-,\.]+)' "Require matching name module" br
+snippet 'r\.([a-z,A-Z,0-9,\-,\.]+)' "Require matching name module" br
 const `!p snip.rv=specialRequire(match.group(1))`
 endsnippet
 
