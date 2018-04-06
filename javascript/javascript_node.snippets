@@ -55,6 +55,10 @@ endsnippet
 
 
 #-------------------------------------------- Require Parent Module --
+snippet rp "Require parent module" b
+const $2 = require('../$1')
+endsnippet
+
 snippet 'rp\.([a-z,A-Z,\-]+)' "Require matching name parent module" br
 const `!p snip.rv=specialRequire(match.group(1), 'parent')`
 endsnippet
