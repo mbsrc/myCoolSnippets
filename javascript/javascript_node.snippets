@@ -172,40 +172,50 @@ endsnippet
 
 
 #-- EXPRESS ----------------------------------------------------------
-snippet ex.app "express app"
+snippet ex.app "Express app"
 const app = express()
 endsnippet
 
 
 #--------------------------------------------- Http Request Methods --
-snippet ex.del "express DELETE"
-app.delete('/$1', function delete${2:`!p snip.rv=t[1].title()`}CB(req, res) {
+snippet ex.del "Express DELETE"
+app.delete('/$1', delete$2Route)
+
+function delete$2Route(req, res) {
 	${0:${VISUAL}}
-})
+}
 endsnippet
 
-snippet ex.get "express GET"
-app.get('/$1', function get${2:`!p snip.rv=t[1].title()`}CB(req, res) {
+snippet ex.get "Express GET"
+app.get('/$1', get$2Route)
+
+function get$2Route(req, res) {
 	${0:${VISUAL}}
-})
+}
 endsnippet
 
-snippet ex.pat "express PATCH"
-app.patch('/$1', function patch${2:`!p snip.rv=t[1].title()`}CB(req, res) {
+snippet ex.pat "Express PATCH"
+app.patch('/$1', patch$2Route)
+
+function patch$2Route(req, res) {
 	${0:${VISUAL}}
-})
+}
 endsnippet
 
-snippet ex.post "express POST"
-app.post('/$1', function post${2:`!p snip.rv=t[1].title()`}CB(req, res) {
+snippet ex.post "Express POST"
+app.post('/$1', post$2Route)
+
+function post$2Route(req, res) {
 	${0:${VISUAL}}
-})
+}
 endsnippet
 
-snippet ex.put "express PUT"
-app.put('/$1', function put${2:functionName}CB(req, res) {
+snippet ex.put "Express PUT"
+app.put('/$1', put$2Route)
+
+function put$2Route(req, res) {
 	${0:${VISUAL}}
-})
+}
 endsnippet
 
 
