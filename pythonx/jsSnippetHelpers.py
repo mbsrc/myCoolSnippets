@@ -6,6 +6,7 @@ specialLibs = {
     'bcryptjs': 'bcrypt',
     'socket.io': 'socketIO',
     'stellar-sdk': 'StellarSdk',
+    'passport-google-oauth20': 'GooglePassportStrategy',
 }
 
 libStrings = {
