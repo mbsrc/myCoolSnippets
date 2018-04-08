@@ -48,9 +48,8 @@ const { $2 } = require('./$1')
 endsnippet
 
 snippet 'rsd\.(\w+)' "Require & destruct named sibling module" br
-#_____ RequireJS Parent Modules _____
-snippet rp "Require parent module" b
-const $2 = require('../$1')
+const { $2 } = require('./`!p snip.rv=match.group(1)`')
+endsnippet
 endsnippet
 
 
