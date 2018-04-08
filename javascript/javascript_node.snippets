@@ -50,6 +50,9 @@ endsnippet
 snippet 'rsd\.(\w+)' "Require & destruct named sibling module" br
 const { $2 } = require('./`!p snip.rv=match.group(1)`')
 endsnippet
+
+snippet rse "Require sibling export module" b
+module.exports = require('./$1')
 endsnippet
 
 
