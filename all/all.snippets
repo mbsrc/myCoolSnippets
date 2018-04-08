@@ -22,6 +22,7 @@ endsnippet
 #---------------------------------------------------------- Headers --
 snippet header "Header" b
 `!p snip.rv=commentSymbol(snip)`-- ${1:`!p t[1]=t[1].title()`} `!p titlePadding(t[1], snip)`
+$0
 endsnippet
 
 snippet header.f "Header with fold marker" b
@@ -35,6 +36,7 @@ endsnippet
 #------------------------------------------------------ Sub-Headers --
 snippet subheader "Subheader" b
 `!p snip.rv=commentSymbol(snip)``!p titlePadding(t[1], snip)` ${1:`!p t[1]=t[1].title()`} --
+$0
 endsnippet
 
 snippet subheader.f "Subheader with fold marker" b
