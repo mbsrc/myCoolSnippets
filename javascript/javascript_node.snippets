@@ -73,6 +73,10 @@ snippet 'rpd\.(\w+)' "Require & destruct named parent module" br
 const { $1 } = require('../`!p snip.rv=match.group(1)`')
 endsnippet
 
+snippet rpe "Require parent export module" b
+module.exports = require('../$1')
+endsnippet
+
 
 #--------------------------------------------------- Module Exports --
 snippet me "Module exports object" b
