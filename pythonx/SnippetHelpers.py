@@ -1,3 +1,5 @@
+PADDING_SIZE = 55
+
 fileTypeCommentSymbols = {
     'javascript': '//',
     'javascript.jsx': '//',
@@ -18,8 +20,8 @@ def commentSymbol(snip):
 
 
 def titlePadding(tabstop, snip, foldType=None):
-    paddingSize = 66
+    paddingSize = PADDING_SIZE
     commentLen = len(commentSymbol(snip))
-    if foldType == 'm': paddingSize = 63
+    if foldType == 'm': paddingSize = PADDING_SIZE - 3
 
     snip.rv = "-" * (paddingSize - len(tabstop) - commentLen)
