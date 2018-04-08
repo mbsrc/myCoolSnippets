@@ -183,6 +183,29 @@ const app = express()
 endsnippet
 
 
+#-------------------------------------------------------- Functions --
+snippet ex.f "Express function" iA
+function $1 (req, res) {
+	${0:${VISUAL}}
+}
+endsnippet
+
+snippet ex.mf "Express middleware function" b
+function $1Middleware (req, res, next) {
+	${0:${VISUAL}}
+
+	next()
+}
+endsnippet
+
+snippet ex.rf "Express route function" iA
+function $1Route (req, res) {
+	${0:${VISUAL}}
+}
+endsnippet
+
+
+
 #--------------------------------------------- Http Request Methods --
 snippet ex.del "Express DELETE"
 app.delete('/$1', delete$2Route)
@@ -242,27 +265,11 @@ endsnippet
 
 
 #------------------------------------------------------- Middleware --
-snippet ex.mf "Express middleware function" b
-const $1 = function $1CB(req, res, next) {
-	${0:${VISUAL}}
-
-	next()
-}
-endsnippet
-
 snippet ex.use "app.use('middleware')" b
-app.use(${1:function ${2:functionName}(req, res, next) {
+app.use(${1:function ${2:functionName} (req, res, next) {
 	$0
 	${3:next()}
 }})
-endsnippet
-
-
-#-------------------------------------------------------- Functions --
-snippet ex.f "Express function" iA
-function $1CB(req, res) {
-	${0:${VISUAL}}
-}
 endsnippet
 
 
