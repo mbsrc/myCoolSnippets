@@ -61,6 +61,12 @@ const $1 = {
 }
 endsnippet
 
+snippet 'co\.(.+)' "const (match) = {...}" br
+const `!p snip.rv=match.group(1)` = {
+	${1:$2: ${3:${VISUAL}},$0}
+}
+endsnippet
+
 snippet col "const object literal" b
 const $1 = {${2:${VISUAL}}}
 endsnippet
