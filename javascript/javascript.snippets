@@ -29,7 +29,7 @@ snippet c "const" b
 const $1 = ${0:${VISUAL}}
 endsnippet
 
-snippet 'c\.([a-z,A-Z,\-]+)' "const (match) = ..." br
+snippet 'c\.(.+)' "const (match) = ..." br
 const `!p snip.rv=match.group(1)` = $0
 endsnippet
 
@@ -162,7 +162,7 @@ snippet im "Import module" b
 import $1 from '$2'
 endsnippet
 
-snippet 'i\.(\w+)' "Import matching name module" br
+snippet 'i\.(.+)' "Import matching name module" br
 import `!p snip.rv="{0} from '{0}'".format(match.group(1))`
 endsnippet
 
@@ -170,7 +170,7 @@ snippet imd "Import & destruct module" b
 import { $1 } from '$2'
 endsnippet
 
-snippet 'imd\.(\w+)' "Import & destruct named module" br
+snippet 'id\.(.+)' "Import & destruct named module" br
 import { $1 } from '`!p snip.rv=match.group(1)`'
 endsnippet
 
@@ -178,7 +178,7 @@ snippet imas "Import * as module" b
 import * as ${1} from '${2:$1}'
 endsnippet
 
-snippet 'imas\.(\w+)' "import * as matching name module" b
+snippet 'ias\.(\w+)' "import * as matching name module" b
 import * as $1 from '`!p snip.rv=match.group(1)`'
 endsnippet
 
