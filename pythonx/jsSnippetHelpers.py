@@ -7,6 +7,7 @@ specialLibs = {
     'socket.io': 'socketIO',
     'stellar-sdk': 'StellarSdk',
     'passport-google-oauth20': 'GooglePassportStrategy',
+    'react-stripe-checkout': 'StripeCheckout',
 }
 
 libStrings = {
