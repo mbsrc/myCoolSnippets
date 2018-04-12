@@ -28,12 +28,11 @@ endsnippet
 
 #-- SECTIONS ---------------------------------------------------------
 #---------------------------------------------------------- Headers --
-snippet header "Header" b
+snippet head "Header" b
 `!p snip.rv=commentSymbol(snip)`-- ${1:`!p t[1]=t[1].title()`} `!p titlePadding(t[1], snip)`
-$0
 endsnippet
 
-snippet header.f "Header with fold marker" b
+snippet head.f "Header with fold marker" b
 `!p snip.rv=commentSymbol(snip)`-- ${1:`!p t[1]=t[1].title()`} `!p titlePadding(t[1], snip, 'm')`{{{
 ${0:${VISUAL}}
 
