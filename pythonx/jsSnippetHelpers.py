@@ -8,6 +8,7 @@ specialLibs = {
     'stellar-sdk': 'StellarSdk',
     'passport-google-oauth20': 'GooglePassportStrategy',
     'react-stripe-checkout': 'StripeCheckout',
+    'express-graphql': 'expressGraphQL',
 }
 
 libStrings = {
