@@ -45,6 +45,10 @@ snippet sub "Subheader" b
 `!p snip.rv=commentSymbol(snip)``!p titlePadding(t[1], snip)` ${1:`!p t[1]=t[1].title()`} --
 endsnippet
 
+snippet sub.g "Subheader - Global Imports" b
+`!p snip.rv=commentSymbol(snip)`--------------------------------------- Global Imports --
+endsnippet
+
 snippet sub.f "Subheader with fold marker" b
 `!p snip.rv=commentSymbol(snip)`-- ${1:`!p t[1]=t[1].title()`} `!p titlePadding(t[1], snip, 'm')`{{{
 ${0:${VISUAL}}
