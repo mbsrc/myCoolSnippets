@@ -1,4 +1,4 @@
-PADDING_SIZE = 55
+PADDING_SIZE = 54
 
 fileTypeCommentSymbols = {
     'javascript': '//',
@@ -13,6 +13,15 @@ fileTypeCommentSymbols = {
     'snippets': '#',
     'gitconfig': '#',
 }
+
+def upperFirstLetter(s):
+    # Prevent string indexing errors.
+    if len(s) < 2: return s
+    return s[0].upper() + s[1:]
+
+def capFirstLetter(words):
+    return ' '.join(upperFirstLetter(word) for word in words.split(' '))
+
 
 def commentSymbol(snip):
     if snip.ft not in fileTypeCommentSymbols: return ""
