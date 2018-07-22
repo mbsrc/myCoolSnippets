@@ -1,30 +1,28 @@
-specialLibs = {
-    'body-parser': 'bodyParser',
-    'supertest': 'request',
-    'lodash': '_',
-    'jsonwebtoken': 'jwt',
-    'bcryptjs': 'bcrypt',
-    'socket.io': 'socketIO',
-    'stellar-sdk': 'StellarSdk',
-    'passport-google-oauth20': 'GooglePassportStrategy',
-    'react-stripe-checkout': 'StripeCheckout',
-    'express-graphql': 'expressGraphQL',
+import re
+
+specialImports = {
+    'lodash':                   '_',
+    'bcryptjs':                 'bcrypt',
+    'supertest':                'request',
+    'socket.io':                'socketIO',
+    'stellar-sdk':              'StellarSdk',
+    'jsonwebtoken':             'jwt',
+    'express-graphql':          'expressGraphQL',
+    'react-stripe-checkout':    'StripeCheckout',
+    'passport-google-oauth20':  'GooglePassportStrategy',
+    'styled-components':  'styled',
 }
 
-libStrings = {
-    'global': "{} = require('{}')",
-    'sibling': "{} = require('./{}')",
-    'parent': "{} = require('../{}')",
-}
 
-def specialRequire(library, relation="global"):
-    returnString = ""
-    libraryNamePair = (library, library)
+def parseLib(snip, match):
+    library = match.group(1)
 
-    if library in specialLibs:
-        libraryNamePair = (specialLibs[library], library)
-
-    return libStrings[relation].format(*libraryNamePair)
+    if library in specialImports:
+        snip.rv = specialImports[library]
+    elif '-' in library:
+        snip.rv = re.sub('-.',lambda x: x.group()[1].upper(), library)
+    else:
+        snip.rv = library
 
 
 def camelCase(s):
