@@ -11,3 +11,29 @@ endsnippet
 snippet $ "${1(1):2}" i
 ${${1:1}:$2}
 endsnippet
+
+
+#-- Python Snippets ---------------------------------------
+snippet py "Python script" i
+`!p snip.rv='\`!p '`$1\`$0
+endsnippet
+
+snippet py.s "snip=rv" i
+`!p snip.rv='\`!p snip.rv='`$1\`$0
+endsnippet
+
+snippet py.m "Python script match.group($1)" i
+`!p snip.rv='\`!p snip.rv=match.group'`(${1:1})\`$0
+endsnippet
+
+snippet py.p "Python script parseLib" i
+`!p snip.rv='\`!p parseLib(snip, match)'`$1\`$0
+endsnippet
+
+snippet py.g "Python script match.group($1)" i
+`!p snip.rv='\`!p group1(snip, match)'`$1\`$0
+endsnippet
+
+snippet py.f "Python script match.group($1)" i
+`!p snip.rv='\`!p fileName(snip, match)'`$1\`$0
+endsnippet
